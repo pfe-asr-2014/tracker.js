@@ -8,7 +8,7 @@ describe('Tracker', function(){
     });
 
     it('let specify the tracker distant URL', function(){
-      t = new Tracker("https://distant.url");
+      t = new Tracker({distant:"https://distant.url"});
       expect(t.distant).toBe("https://distant.url")
     });
 

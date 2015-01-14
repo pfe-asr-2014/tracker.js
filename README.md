@@ -7,7 +7,7 @@ A simple solution to track user of the TSP MOOC Platform.
 Include the script `ls/tracker.js` on your webpage. Then in code:
 
 ```js
-var tracker = new tracker("url");
+var tracker = new Tracker({distant: 'url'});
 
 // With selector
 tracker.on('.my-element').track('click');
@@ -16,6 +16,15 @@ tracker.on('.my-element').track('click');
 var element = document.querySelectorAll('.my-class');
 tracker.on(element).track('click');
 ```
+
+## Options
+
+When you create the tracker, you can pass some information to it:
+
+| Key        | Description                                                |
+|:----------:|------------------------------------------------------------|
+| `distant`  | The URL of the server to which you want to send events. (default to `location`) |
+| `tryAgain` | The number of times the tracker will try to send events before stopping. (default to `3`) |
 
 ## Run the tests
 

@@ -23,8 +23,12 @@
     });
   };
 
-  function Tracker(distant) {
-    this.distant = distant || location;
+  function Tracker(opts) {
+    if(undefined == opts) {
+      opts = {};
+    }
+    this.distant = opts.distant || location;
+    this.tryAgain = opts.tryAgain || 3;
   }
 
   Tracker.prototype.on = function (selector) {
