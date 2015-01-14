@@ -53,10 +53,46 @@
     return new ElementTracker(el, this);
   };
 
-  Tracker.prototype.send = function (e) {
-    // TODO verify format of passed event
-    // TODO Create a new object with required info
-    // TODO Send it with XHR (if error, retry)
+  Tracker.prototype.send = function (e, count) {
+    // Verify format of passed event
+    if(undefined === e ||
+       undefined === e.category ||
+       undefined === e.action ||
+       undefined === e.label) {
+      throw new Error("Category, Action and Label fields are mandatory.");
+    }
+
+    // If count is not provided, it is the first try
+    if(undefined === count) {
+      count = 1;
+    }
+
+    // Create a new object with required info
+    var toSend = {
+      category: e.category,
+      action: e.action,
+      label: e.label,
+      datetime: new Date()
+    }
+
+    // Send it with XHR (if error, retry)
+    var request = new XMLHttpRequest();
+
+    var send = function(tracker) {
+      return function() {
+        if (4 === request.readyState &&
+            200 !== request.status &&
+            count < tracker.tryAgain) {
+          // Try again
+          tracker.send(e, ++count);
+        }
+      }
+    };
+    request.onreadystatechange = send(this);
+
+    request.open('POST', this.distant);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(JSON.stringify(toSend));
   };
 
   window.Tracker = Tracker;

@@ -13,3 +13,19 @@ function fireEvent(el, etype){
     el.dispatchEvent(evObj);
   }
 }
+
+/**
+ * Return the most recent request of jasmine-ajax mock.
+ */
+function lastRequest() {
+  return jasmine.Ajax.requests.mostRecent();
+}
+
+
+var MockResponses = {
+  failure: {
+    'status': 500,
+    'contentType': 'application/json',
+    'responseText': 'awesome response'
+  }
+};
