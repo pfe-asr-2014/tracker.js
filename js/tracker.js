@@ -17,6 +17,10 @@
       throw new Error(event + ' not supported.');
     }
 
+    var et = this;
+    this.element.addEventListener(event, function(e){
+      et.tracker.send(e);
+    });
   };
 
   function Tracker(distant) {

@@ -51,8 +51,9 @@ describe('Tracker', function(){
 });
 
 describe('EventTracker', function(){
+  var el;
   beforeAll(function(){
-    var el = document.createElement('p');
+    el = document.createElement('p');
     el.classList.add('sel');
     document.body.appendChild(el);
   });
@@ -84,6 +85,12 @@ describe('EventTracker', function(){
   });
 
   describe('send the event to the distant server', function(){
+    it('pass the event to send when it has occured', function(){
+      t.on(el).track('click');
+      spyOn(t, 'send');
 
+      fireEvent(el, 'click');
+      expect(t.send).toHaveBeenCalled();
+    });
   });
 });
