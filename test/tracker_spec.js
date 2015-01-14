@@ -44,7 +44,7 @@ describe('Tracker', function(){
   });
 
   describe('send', function(){
-    var baseTime = new Date(1990, 4, 17);
+    var baseTime = new Date('1990-04-17T00:00:00.000Z')
 
     beforeEach(function() {
       t = new Tracker({distant:"https://distant.url"});
@@ -111,7 +111,7 @@ describe('Tracker', function(){
       expect(json.category).toBe('mooc');
       expect(json.action).toBe('click');
       expect(json.label).toBe('my link title');
-      expect(json.datetime).toBe('1990-05-16T22:00:00.000Z');
+      expect(json.datetime).toBe('1990-04-17T00:00:00.000Z');
     });
 
     it('if it failed it try again based on the config', function(){
