@@ -1,5 +1,7 @@
 # tracker.js
 
+[![Build Status](https://travis-ci.org/pfe-asr-2014/tracker.js.svg)](https://travis-ci.org/pfe-asr-2014/tracker.js)
+
 A simple solution to track user of the TSP MOOC Platform.
 
 ## Usage
